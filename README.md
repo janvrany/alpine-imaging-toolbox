@@ -13,6 +13,13 @@ taken from [@sfan5's alpine-container.sh][2].
 
 As mentioned above, there's a sister project - [debian-imaging-toolbox][1].
 
+## Prerequisites
+
+ 1. [alpine-chroot-install][3]
+ 2. `run-parts`
+
+On Debian do: `apt install debianutils alpine-chroot-install`
+
 ## !!! BIG FAT WARNING !!!
 
 Scripts in this repository do use `sudo` quite a lot. **IF THERE'S A BUG,
@@ -74,6 +81,7 @@ The root image might be:
 
 [1]: https://github.com/janvrany/debian-imaging-toolbox
 [2]: https://gist.github.com/sfan5/52aa53f5dca06ac3af30455b203d3404
+[3]: https://github.com/alpinelinux/alpine-chroot-install/
 [4]: https://libguestfs.org/
 [5]: https://libguestfs.org/guestfish.1.html#adding-remote-storage
 [6]: https://www.freedesktop.org/software/systemd/man/systemd-nspawn.html
