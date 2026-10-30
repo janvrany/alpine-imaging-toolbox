@@ -198,14 +198,6 @@ function mount_ROOT() {
 }
 
 function umount_ROOT() {
-    if [ -d "${ROOT}/proc/self" ]; then
-        sleep 1
-        sudo umount "${ROOT}/proc"
-    fi
-    if findmnt -n "${ROOT}/etc/resolv.conf"; then
-        sleep 1
-        sudo umount "${ROOT}/etc/resolv.conf"
-    fi
     if grep "${ROOT}" /etc/mtab > /dev/null; then
         echo "I: umounting '${ROOT}'"
         fstype=$(grep "${ROOT}" /etc/mtab | cut -d ' ' -f 3)
@@ -213,9 +205,9 @@ function umount_ROOT() {
         if [ "$fstype" == "fuse" ]; then
             # sudo \
             #guestunmount "${ROOT}"
-            sudo umount "$ROOT"
+            sudo umount --recursive "$ROOT"
         else
-            sudo umount "$ROOT"
+            sudo umount --recursive  "$ROOT"
         fi
         case "$fssource" in
             /dev/mapper/loop*)
