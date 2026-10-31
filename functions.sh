@@ -221,3 +221,16 @@ function umount_ROOT() {
 
     fi
 }
+
+#
+# Provide an easy access to `apk` in build-hooks
+#
+: ${APK_TOOLS_URI:="https://gitlab.alpinelinux.org/api/v4/projects/5/packages/generic/v2.14.7/x86_64/apk.static"}
+: ${APK_TOOLS_SHA256:="bdd044e0fd6cc388c5e571e1093efa5f35f7767cc5aa338b0a2576a429009a62"}
+
+function apk () {
+    if [ ! -f "$CONFIG_BUILD_TMP_DIR/apk.static" ]; then
+        wget -O "$CONFIG_BUILD_TMP_DIR/apk.static" "$APK_TOOLS_URI"
+    fi
+    "$CONFIG_BUILD_TMP_DIR/apk.static" "$@"
+}

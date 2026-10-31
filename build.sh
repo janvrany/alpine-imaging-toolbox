@@ -63,3 +63,13 @@ echo '
 console::respawn:/sbin/getty 38400 console
 ' | sudo tee -a "${ROOT}"/etc/inittab
 
+
+#
+# Run hooks
+#
+for hook in $(run-parts --list --regex "customize.*\.sh" "$CONFIG_BUILD_HOOK_DIR"); do
+    echo "---"
+    echo "Running hook $hook"
+    echo ""
+    sudo -E "$hook" "$ROOT"
+done
